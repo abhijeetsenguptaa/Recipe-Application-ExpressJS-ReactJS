@@ -5,12 +5,9 @@ const { Op } = require('sequelize'); // Import Sequelize's operator
 async function addingFavorite(req, res) {
     try {
         const id = req.params.id;
-        const { title, image } = req.body;
 
         // Create a new favorite record in the database
         const favorite = await Favorite.create({
-            title,
-            image,
             recipeID: Number(id),
             userId: req.userId, // The user ID is added from the authentication middleware
         });

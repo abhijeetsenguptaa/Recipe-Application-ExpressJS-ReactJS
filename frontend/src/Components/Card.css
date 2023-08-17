@@ -1,0 +1,44 @@
+.card {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 90%;
+    padding: 10px;
+    margin: 20px auto;
+    background-color: white;
+  }
+  
+  .card-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .favorite-button,
+  .details-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .favorite-button:hover,
+  .details-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .favorite-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .favorite-button .icon {
+    font-size: 18px;
+  }
+  

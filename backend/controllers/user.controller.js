@@ -83,7 +83,7 @@ async function loggingUser(req, res) {
         // Compare the provided password with the hashed password in the database
         const isPasswordMatch = await bcrypt.compare(password, checkUser.password);
         if (!isPasswordMatch) {
-            res.status(401).json({
+            return res.status(401).json({
                 status: 'false',
                 error: 'Invalid credentials.',
             });

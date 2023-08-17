@@ -3,14 +3,6 @@ const { connection } = require('../configs/connection');
 const { User } = require('./user.model'); // Import the User model
 
 const Favorite = connection.define('favorites', {
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    image: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     recipeID : {
         type : DataTypes.INTEGER,
         allowNull : false
