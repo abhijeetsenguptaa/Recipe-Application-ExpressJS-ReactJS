@@ -226,5 +226,137 @@ Welcome to the API documentation for the WebLedger User Routes. This documentati
   }
   ```
 
+## Favorite Routes
+
+### Add a Favorite Recipe
+
+**Route**: POST /favorites/:id
+
+**Description**: Add a recipe to the user's favorites.
+
+**Request Headers**:
+- Authorization: Bearer <token>
+
+**Request Body**:
+
+Field    | Type   | Description
+-------- | ------ | ---------------------------
+title    | String | The title of the recipe.
+image    | String | The image URL of the recipe.
+
+**Responses**:
+
+- 201 (Created):
+  ```json
+  {
+    "status": true,
+    "data": {
+      "id": "favorite_id",
+      "title": "Chicken Curry",
+      "image": "http://example.com/chicken-curry.jpg",
+      "recipeID": "recipe_id",
+      "userId": "user_id"
+    },
+    "msg": "Favorite recipe added successfully"
+  }
+  ```
+- 400 (Bad Request):
+  ```json
+  {
+    "status": false,
+    "msg": "Invalid request data"
+  }
+  ```
+- 500 (Internal Server Error):
+  ```json
+  {
+    "status": false,
+    "msg": "An error occurred while adding the favorite recipe"
+  }
+  ```
+
+### Get Favorite Recipes
+
+**Route**: GET /favorites
+
+**Description**: Retrieve user's favorite recipes.
+
+**Request Headers**:
+- Authorization: Bearer <token>
+
+**Query Parameters**:
+
+Parameter | Type   | Description
+--------- | ------ | ---------------------------
+id        | String | Get a favorite recipe by its ID.
+title     | String | Get favorite recipes by title search.
+
+**Responses**:
+
+- 200 (OK):
+  ```json
+  {
+    "status": true,
+    "data": [
+      {
+        "id": "favorite_id",
+        "title": "Chicken Curry",
+        "image": "http://example.com/chicken-curry.jpg",
+        "recipeID": "recipe_id",
+        "userId": "user_id"
+      },
+      ...
+    ]
+  }
+  ```
+- 404 (Not Found):
+  ```json
+  {
+    "status": false,
+    "msg": "Favorite recipe not found"
+  }
+  ```
+- 500 (Internal Server Error):
+  ```json
+  {
+    "status": false,
+    "msg": "An error occurred while retrieving favorite recipes"
+  }
+  ```
+
+### Delete Favorite Recipe
+
+**Route**: DELETE /favorites/:id
+
+**Description**: Delete a favorite recipe.
+
+**Request Headers**:
+- Authorization: Bearer <token>
+
+**Responses**:
+
+- 200 (OK):
+  ```json
+  {
+    "status": true,
+    "msg": "Favorite recipe deleted successfully"
+  }
+  ```
+- 404 (Not Found):
+  ```json
+  {
+    "status": false,
+    "msg": "Favorite recipe not found"
+  }
+  ```
+- 500 (Internal Server Error):
+  ```json
+  {
+    "status": false,
+    "msg": "An error occurred while deleting the favorite recipe"
+  }
+  ```
+
 ---
+
 

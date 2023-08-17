@@ -6,6 +6,7 @@ const express = require('express');
 const cors = require('cors');
 const { connection } = require('./configs/connection'); // Assuming this imports your database connection configuration
 const { userRoute } = require('./routes/user.route');
+const { favoriteRoute } = require('./routes/favorite.route');
 
 // Set up the port for the server to listen on
 const PORT = process.env.PORT || 3001;
@@ -37,6 +38,8 @@ app.get('/', async (req, res) => {
 
 // Use the user route for handling user-related routes
 app.use('/users', userRoute);
+// Use the favorite route for handling favorite-recipes-related routes
+app.use('/favorites', favoriteRoute);
 
 // Synchronize the database and start the server
 connection.sync().then(() => {
