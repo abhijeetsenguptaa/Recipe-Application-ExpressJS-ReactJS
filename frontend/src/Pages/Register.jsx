@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import the Link component
 import InputBox from '../Components/InputBox';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for styling
-
+import 'react-toastify/dist/ReactToastify.css';
+import './Register.css'
 export default function Register() {
     document.title = "Register"
     const url = 'http://localhost:3001/'
@@ -31,12 +32,11 @@ export default function Register() {
                 toast.success('Registration successful');
             })
             .catch(error => {
-                // console.error(error);
                 if (error.response) {
                     const statusCode = error.response.status;
-                    if (statusCode.toString() === 400) {
+                    if (statusCode.toString() === '400') {
                         toast.error('Invalid input. Please provide valid data.');
-                    } else if (statusCode.toString() === 409) {
+                    } else if (statusCode.toString() === '409') {
                         toast.error('User with this email already exists.');
                     } else {
                         toast.error('An error occurred. Please try again later.');
@@ -52,10 +52,10 @@ export default function Register() {
             <div>
                 {/* Apply the left navBar */}
             </div>
-            <div style={{ textAlign: 'center',padding:'10px' }}>
+            <div className="register-container">
                 <h1>CookBook</h1>
                 <p>Once registered, CookBook is free to try with up to 40 recipes & 5 OCR scans. You will need to select a subscription once you've reached these limits.</p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', width: '100%', textAlign: 'center' }}>
+                <div className="links-container">
                     <p>Pricing</p>
                     <p>|</p>
                     <p>Why Register</p>
@@ -68,7 +68,7 @@ export default function Register() {
                 <InputBox type="email" placeholder="Valid email address.." name="email" onChange={handleChange} value={formData.email} />
                 <InputBox type="password" placeholder="Password (min 8 characters).." name="password" onChange={handleChange} value={formData.password} />
                 <InputBox type="number" placeholder="Age.." name="age" onChange={handleChange} value={formData.age} />
-                <select name="gender" onChange={handleChange} value={formData.gender} style={{ padding: '12px', width: '40%', textAlign: 'center', borderRadius: '6px' }}>
+                <select name="gender" onChange={handleChange} value={formData.gender} className="select-input">
                     <option value="">Choose your gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -76,8 +76,9 @@ export default function Register() {
                 </select>
                 <h2>By continuing you agree to our Terms and Privacy Policy.</h2>
                 <InputBox type="checkbox" />
-                <button style={{ padding: '10px', width: '40%', textAlign: 'center', borderRadius: '6px', backgroundColor: 'black', color: 'white' }} onClick={handleClick}>Create Account</button>
-                <ToastContainer /> {/* The toast container */}
+                <button className="register-button" onClick={handleClick}>Create Account</button>
+                <Link to="/login" className="login-link">Already have an account? Login here</Link>
+                <ToastContainer />
             </div>
         </div>
     );

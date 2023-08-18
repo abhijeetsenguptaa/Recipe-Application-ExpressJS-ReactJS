@@ -30,11 +30,27 @@ async function addingFavorite(req, res) {
 // Controller function to get favorite recipes
 async function gettingFavorite(req, res) {
     try {
-        const { id, title } = req.query;
+        const { id, title,recipeID } = req.query;
         const userId = req.userId; // The user ID is added from the authentication middleware
 
         if (id) {
             const favorite = await Favorite.findOne({ where: { id, userId } });
+
+            if (!favorite) {
+                return res.status(404).json({
+                    status: false,
+                    msg: 'Favorite recipe not found',
+                });
+            }
+
+            return res.status(200).json({
+                status: true,
+                data: favorite,
+            });
+        }
+
+        if (recipeID) {
+            const favorite = await Favorite.findOne({ where: { recipeID, userId } });
 
             if (!favorite) {
                 return res.status(404).json({

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import './FavoriteByID.css'; // Import your custom CSS file for styling
 
 export default function FavoriteByID() {
+    document.title = 'More Detail';
     const [data, setData] = useState(null);
     const { id } = useParams();
 
@@ -13,10 +14,12 @@ export default function FavoriteByID() {
     }
 
     useEffect(() => {
-        axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=bb1692a2431e40c09ae952ef475f2a70`)
+        axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=3f452015613c4afcb2afec32fad21db0`)
             .then(res => setData(res.data))
             .catch(error => console.log(error)); // Handle any potential errors
     }, [id]);
+
+    
 
     return (
         <div className='favoriteDetailCard'>
@@ -31,9 +34,25 @@ export default function FavoriteByID() {
                             </div>
                         ))}
                     </div>
-                    <p><b>Instructions:</b> {removeHtmlTags(data.instructions)}</p>
+                    <div className='instructions-container'>
+                        <div className='instruction-box'>
+                            <b>Instructions:</b>
+                            <div >
+                                {removeHtmlTags(data.instructions)
+                                    .split('.')
+                                    .filter(step => step.trim() !== '') // Remove empty steps
+                                    .map((step, index) => (
+                                        <div key={index} className='instruction-step'>
+                                            <span className='step-number'>{index + 1}.</span>
+                                            <span className='step-text'>{step.trim()}.</span>
+                                        </div>
+                                    ))}
+                            </div>
+                        </div>
+                    </div>
                 </>
             )}
+            
         </div>
     );
 }

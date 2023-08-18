@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Login() {
+export default function Reset() {
     const [formData, setFormData] = React.useState({
         'email': '',
         'password': ''
@@ -19,13 +19,11 @@ export default function Login() {
     }
 
     const handleClick = () => {
-        axios.post('http://localhost:3001/users/login', formData)
+        axios.post('http://localhost:3001/users/reset-password', formData)
             .then((res) => {
-                localStorage.setItem('token', res.data.token);
-                toast.success('Login successful!', {
+                toast.success('Password Changed successful!', {
                     position: toast.POSITION.TOP_RIGHT
                 });
-                window.location = '/recipes'
             })
             .catch((err) => {
                 if (err.response) {
@@ -48,7 +46,7 @@ export default function Login() {
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
+            <h2>Change Password</h2>
             <form className="login-form">
                 <div className="form-group">
                     <label>Email:</label>
@@ -58,14 +56,8 @@ export default function Login() {
                     <label>Password:</label>
                     <input type="password" name="password" value={formData.password} onChange={handleChange} />
                 </div>
-                <button className="login-button" type="button" onClick={handleClick}>Log In</button>
+                <button className="login-button" type="button" onClick={handleClick}>Change Password</button>
             </form>
-            <p>
-                <a className="forgot-password-link" href="/forgot-password">Forgot Password?</a>
-            </p>
-            <p>
-                Don't have an account? <a className="signup-link" href="/register">Sign Up</a>
-            </p>
             <ToastContainer />
         </div>
     );

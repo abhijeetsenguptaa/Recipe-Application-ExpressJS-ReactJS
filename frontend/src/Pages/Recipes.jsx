@@ -1,33 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from '../Components/Card';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Navbar from '../Components/Navbar';
+import './Recipes.css'
 
 export default function Recipes() {
+    document.title = 'Recipes'
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const handleFavorite = (e) => {
-        let obj = {
-            recipeID: e,
-        }
-        axios.post(`http://localhost:3001/favorites/${e}`, obj, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: localStorage.getItem('token')
+    const handleFavorite = async (e) => {
+        try {
+            const response = await axios.get(`http://localhost:3001/favorites/?recipeID=${e}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: localStorage.getItem('token')
+                }
+            });
+
+            if (response.status === 200) {
+                toast.error('Item is already in the Favorites.');
             }
-        })
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+
+        } catch (error) {
+            if (error.response.status === 404) {
+                try {
+                    await axios.post(`http://localhost:3001/favorites/${e}`, {
+                        recipeID: e
+                    }, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: localStorage.getItem('token')
+                        }
+                    });
+                    toast.success('Recipe added to Favorites.');
+                } catch (error) {
+                    toast.error('Failed to add recipe to Favorites.');
+                }
+            }
+        }
     }
 
     const handleDetails = (e) => {
-        window.location.href = `/${e}`
+        window.location.href = `/${e}`;
     }
 
     useEffect(() => {
         axios
-            .get('https://api.spoonacular.com/recipes/complexSearch?apiKey=bb1692a2431e40c09ae952ef475f2a70')
+            .get('https://api.spoonacular.com/recipes/complexSearch?apiKey=3f452015613c4afcb2afec32fad21db0')
             .then((res) => {
                 setData(res.data.results);
                 setLoading(false);
@@ -47,10 +70,14 @@ export default function Recipes() {
     }
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr', gap: '10px', padding: '10px' }}>
-            {data.map((recipe) => (
-                <Card key={recipe.id} title={recipe.title} image={recipe.image} onFavoriteClick={(e) => handleFavorite(recipe.id)} onDetailsClick={(e) => handleDetails(recipe.id)} />
-            ))}
+        <div>
+            <Navbar/>
+            <div className='recipe-items'>
+                {data.map((recipe) => (
+                    <Card key={recipe.id} title={recipe.title} image={recipe.image} onFavoriteClick={() => handleFavorite(recipe.id)} onDetailsClick={() => handleDetails(recipe.id)} />
+                ))}
+            </div>
+            <ToastContainer position="bottom-right" />
         </div>
     );
 }
