@@ -1,107 +1,135 @@
 /* Navbar.css */
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid black;
-    padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
 .logo-menu {
-    display: flex;
-    gap: 20%;
-    position: relative;
+  display: flex;
+  gap: 20%;
+  position: relative;
 }
 
 .menu-item {
-    position: relative;
-    cursor: pointer;
+  position: relative;
+  cursor: pointer;
 }
 
 .menu-item:hover .dropdown-content {
-    cursor: pointer;
-    display: block;
-    transform: translateY(0); /* Slide down animation */
+  cursor: pointer;
+  display: block;
+  transform: translateY(0); /* Slide down animation */
 }
 
 .dropdown-content {
-    position: absolute;
-    top: 50px;
-    width: 100px;
-    border-radius: 10px;
-    left: -10px;
-    display: none;
-    background-color: white;
-    padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateY(-20px); /* Initial offset for slide down animation */
-    transition: transform 0.3s ease; /* Add transition for transform */
+  position: absolute;
+  top: 50px;
+  width: 100px;
+  border-radius: 10px;
+  left: -10px;
+  display: none;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-20px); /* Initial offset for slide down animation */
+  transition: transform 0.3s ease; /* Add transition for transform */
 }
 
 #startBtn {
-    background-color: rgb(1, 1, 42);
-    color: white;
-    width: 160px;
-    padding: 14px;
-    border-radius: 20px;
-    border: none;
-    transition: all 0.3s ease;
-    margin-right: 20px; /* Add transition property */
+  background-color: rgb(1, 1, 42);
+  color: white;
+  width: 160px;
+  padding: 14px;
+  border-radius: 20px;
+  border: none;
+  transition: all 0.3s ease;
+  margin-right: 20px; /* Add transition property */
 }
 
 #startBtn:hover {
-    background-color: green;
-    cursor: pointer;
-    transform: scale(1.1); /* Increase the size by 10% */
+  background-color: green;
+  cursor: pointer;
+  transform: scale(1.1); /* Increase the size by 10% */
 }
 
-
 .logOutBtn {
-    position: fixed;
-    bottom: 10px;
-    right: 14px;
-    width: 100px;
-    height: 50px;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    border: none;
-    font-weight: bolder;
-    background-color: #f44336;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-    outline: none;
+  position: fixed;
+  bottom: 10px;
+  right: 14px;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: bolder;
+  background-color: #f44336;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
 }
 
 .logOutBtn:hover {
-    background-color: #d32f2f;
-    cursor: pointer;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #d32f2f;
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.yourFavorites {
+  bottom: 10px;
+  right: 14px;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: bolder;
+  background-color: #08b027;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+.yourFavorites:hover {
+  background-color: #d32f2f;
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (max-width: 768px) {
-    .navbar {
-      flex-direction: column;
-    }
-  
-    .menu-item {
-    display: none;
-    }
-  
-    #startBtn {
-      margin-top: 10px;
-      margin-right: 0;
-    }
-  
-    .logOutBtn {
-      position: relative;
-      margin: 10px 0;
-    }
+  .navbar {
+    flex-direction: column;
   }
+
+  .menu-item {
+    display: none;
+  }
+
+  #startBtn {
+    margin-top: 10px;
+    margin-right: 0;
+  }
+
+  .logOutBtn {
+    margin: 10px 0;
+  }
+
+  .yourFavorites {
+    margin: 10px 0;
+  }
+}

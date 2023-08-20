@@ -10,6 +10,10 @@ export default function Navbar() {
     window.location = '/';
   };
 
+  const handleFavorites = () => {
+    window.location = "/favorites"
+  }
+
   React.useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -47,7 +51,10 @@ export default function Navbar() {
         </div>
         <div>
           {logOut ? (
-            <button className='logOutBtn' onClick={handleLogout}>Logout</button>
+            <div className='short'>
+              <button className='yourFavorites' onClick={handleFavorites}>Your Favorites</button>
+              <button className='logOutBtn' onClick={handleLogout}>Logout</button>
+            </div>
           ) : (
             <button id='startBtn' onClick={() => window.location = "/login"}>
               {isMobile ? 'Login' : 'Get Started'}

@@ -11,7 +11,7 @@ export default function FavoriteCard(props) {
     }
 
     useEffect(() => {
-        axios.get(`https://api.spoonacular.com/recipes/${props.id}/information?apiKey=3f452015613c4afcb2afec32fad21db0`)
+        axios.get(`https://api.spoonacular.com/recipes/${props.id}/information?apiKey=bb1692a2431e40c09ae952ef475f2a70`)
             .then(res => setData(res.data))
             .catch(err => console.log(err))
     }, [props.id]);
@@ -20,7 +20,7 @@ export default function FavoriteCard(props) {
         <div className="favorite-card" key={props.id}>
             {data && (
                 <>
-                    <Link to={`/${props.id}`}>
+                    <Link to={`/${props.id}`} style={{textDecoration:'none'}}>
                         <img className="recipe-image" src={data.image} alt={data.title} />
                         <h3 className="recipe-title">{data.title}</h3>
                         <h4 className="time-to-make">Time to Make: {data.readyInMinutes} minutes</h4>

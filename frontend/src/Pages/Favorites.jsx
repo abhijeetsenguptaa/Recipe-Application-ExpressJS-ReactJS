@@ -43,12 +43,12 @@ export default function Favorites() {
     }, []);
 
     return (
-        <div>
+        <div style={{textAlign:'center'}}>
             <h2>Your Favorites</h2>
             {loading && <p>Loading...</p>}
             {error && <p>Error fetching favorites.</p>}
             {!loading && !error && (
-                <ul>
+                <ul style={{display:'grid',gridTemplateColumns:'repeat(3,1fr'}}>
                     {data.map(favorite => (
                         <FavoriteCard id={favorite.recipeID} key={favorite.id} handleRemove={() => removeHandler(favorite.id)} />
                     ))}
